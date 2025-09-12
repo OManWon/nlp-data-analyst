@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+mlflow
+seaborn
+pandas
+matplotlib
+langgraph
+langchain-core
+langchain-experimental
+langchain-google-genai
