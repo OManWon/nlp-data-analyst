@@ -1,0 +1,14 @@
+artifact_uri: file:///mnt/c/Users/anseh/Workspace/nlp-data-analyst/backend/mlruns/738808092654392339/4f6e83d495c44975861cde8077836d81/artifacts
+end_time: 1757648080350
+entry_point_name: ''
+experiment_id: '738808092654392339'
+lifecycle_stage: active
+run_id: 4f6e83d495c44975861cde8077836d81
+run_name: upload_file
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757648079865
+status: 3
+tags: []
+user_id: anseh

@@ -1,0 +1,36 @@
+[
+  {
+    "role": "user",
+    "content": "PID가 제공되었니 ?"
+  },
+  {
+    "role": "assistant",
+    "run_id": "c68b6d58652f4936bb0da0e055b68a3a",
+    "plan": "네, PID 278329101867956079가 제공되었습니다. 이 데이터로 무엇을 도와드릴까요?",
+    "code": "",
+    "artifacts": [],
+    "active_dataset": null,
+    "stdout": "",
+    "stderr": "",
+    "error": ""
+  },
+  {
+    "role": "user",
+    "content": "오케이 ! 데이터 읽어서 간략히 요약해줘."
+  },
+  {
+    "role": "user",
+    "content": "오케이 ! 데이터 읽어서 간략히 요약해줘."
+  },
+  {
+    "role": "assistant",
+    "run_id": "dc2c9d650b5d447f9644815722941e4d",
+    "plan": "",
+    "code": "",
+    "artifacts": [],
+    "active_dataset": null,
+    "stdout": "",
+    "stderr": "",
+    "error": ""
+  }
+]

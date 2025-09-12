@@ -1,0 +1,21 @@
+[
+  {
+    "role": "user",
+    "content": "안녕"
+  },
+  {
+    "role": "user",
+    "content": "안녕"
+  },
+  {
+    "role": "assistant",
+    "run_id": "89d0bc1e07694afd8c7600e3a1327ac0",
+    "plan": "안녕하세요! 무엇을 도와드릴까요?",
+    "code": "",
+    "artifacts": [],
+    "active_dataset": null,
+    "stdout": "",
+    "stderr": "",
+    "error": ""
+  }
+]

@@ -1,0 +1,14 @@
+artifact_uri: file:///mnt/c/Users/anseh/Workspace/nlp-data-analyst/backend/mlruns/278329101867956079/dc2c9d650b5d447f9644815722941e4d/artifacts
+end_time: 1757648006727
+entry_point_name: ''
+experiment_id: '278329101867956079'
+lifecycle_stage: active
+run_id: dc2c9d650b5d447f9644815722941e4d
+run_name: chat
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757648004713
+status: 3
+tags: []
+user_id: anseh

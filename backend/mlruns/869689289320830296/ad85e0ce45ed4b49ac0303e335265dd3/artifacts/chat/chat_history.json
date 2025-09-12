@@ -1,0 +1,36 @@
+[
+  {
+    "role": "user",
+    "content": "안녕"
+  },
+  {
+    "role": "assistant",
+    "run_id": "89d0bc1e07694afd8c7600e3a1327ac0",
+    "plan": "안녕하세요! 무엇을 도와드릴까요?",
+    "code": "",
+    "artifacts": [],
+    "active_dataset": null,
+    "stdout": "",
+    "stderr": "",
+    "error": ""
+  },
+  {
+    "role": "user",
+    "content": "열 이름 알려줘."
+  },
+  {
+    "role": "user",
+    "content": "열 이름 알려줘."
+  },
+  {
+    "role": "assistant",
+    "run_id": "ad85e0ce45ed4b49ac0303e335265dd3",
+    "plan": "데이터를 불러오는 중에 오류가 발생했습니다. 파일 ID가 올바른지 확인해 주세요.",
+    "code": "",
+    "artifacts": [],
+    "active_dataset": null,
+    "stdout": "",
+    "stderr": "",
+    "error": ""
+  }
+]

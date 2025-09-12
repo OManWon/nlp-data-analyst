@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk2Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">📊 Talk2Data</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>프로젝트</span>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#newProjectModal">
+                            <i class="bi bi-plus-circle"></i>
+                        </button>
+                    </h6>
+                    <ul class="nav flex-column" id="project-list">
+                        <!-- 프로젝트 목록이 여기에 동적으로 추가됩니다. -->
+                    </ul>
+
+                    <div id="current-project-details" class="mt-4 px-3 d-none">
+                        <h6 class="sidebar-heading mb-1 text-muted">데이터셋</h6>
+                        <div class="d-grid">
+                            <label for="file-upload-input" class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-upload"></i> CSV 업로드
+                            </label>
+                            <input type="file" id="file-upload-input" accept=".csv" class="d-none">
+                        </div>
+                        <ul class="nav flex-column mt-2" id="dataset-list">
+                            <!-- 데이터셋 목록이 여기에 동적으로 추가됩니다. -->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div id="welcome-screen" class="text-center">
+                    <h1 class="mt-5">Talk2Data에 오신 것을 환영합니다</h1>
+                    <p class="lead">왼쪽 사이드바에서 프로젝트를 선택하거나 새 프로젝트를 생성하세요.</p>
+                </div>
+
+                <div id="chat-container" class="d-none">
+                    <div id="chat-messages" class="chat-messages">
+                        <!-- 채팅 메시지가 여기에 동적으로 추가됩니다. -->
+                    </div>
+                    <div class="chat-input-container">
+                        <form id="chat-form" class="input-group">
+                            <input type="text" id="message-input" class="form-control" placeholder="데이터에 대해 질문하세요..." disabled>
+                            <button class="btn btn-primary" type="submit" id="send-button" disabled>
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- New Project Modal -->
+    <div class="modal fade" id="newProjectModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">새 프로젝트 생성</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="new-project-form">
+                        <div class="mb-3">
+                            <label for="project-name-input" class="form-label">프로젝트 이름</label>
+                            <input type="text" class="form-control" id="project-name-input" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="create-project-btn">생성</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
