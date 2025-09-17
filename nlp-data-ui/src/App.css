@@ -1,0 +1,288 @@
+/* src/App.css (기존 내용에 추가 또는 수정) */
+
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.graph-panel {
+  flex: 1; /* 남은 공간을 모두 차지 */
+  border-right: 2px solid #eee;
+}
+
+.chat-panel {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-log {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.chat-message {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 85%;
+}
+
+.chat-message.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.chat-message.agent {
+  background-color: #f1f0f0;
+  color: #333;
+  align-self: flex-start;
+}
+
+.thought-process {
+  font-size: 0.8em;
+  color: #666;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+  padding-top: 5px;
+}
+
+.chat-form {
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+.chat-form input {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.chat-form button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.react-flow__node {
+  position: relative;
+}
+
+/* 삭제 버튼의 기본 스타일 및 위치 */
+.delete-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+  
+  /* 평소에는 투명하게 만듭니다. */
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+/* 노드에 마우스를 올렸을 때(hover), 삭제 버튼을 보이게 합니다. */
+.react-flow__node:hover .delete-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.main-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.tabs button.active {
+  border-bottom: 3px solid #007bff;
+  font-weight: bold;
+}
+
+.tab-content {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.chat-view {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.plots-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.plot-item {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.plot-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.plot-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.plot-item:hover .plot-overlay {
+  opacity: 1;
+}
+
+.plots-gallery-empty {
+  padding: 40px;
+  text-align: center;
+  font-size: 1.2em;
+  color: #888;
+}
+
+.chat-panel {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #eee; /* 그래프 패널과 구분선 추가 */
+}
+
+/* --- ✨ 새로운 스타일 추가 시작 --- */
+.preview-panel {
+  flex-shrink: 0;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  background-color: #fcfcfc;
+  max-height: 35%; /* 패널 최대 높이 제한 */
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-panel h4 {
+  margin: 0 0 10px 0;
+  font-size: 1em;
+}
+
+.preview-panel-placeholder {
+  padding: 20px;
+  text-align: center;
+  color: #aaa;
+}
+
+.table-container {
+  overflow: auto; /* 내용이 많으면 스크롤 */
+}
+
+.preview-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8em;
+}
+
+.preview-panel th, .preview-panel td {
+  border: 1px solid #ddd;
+  padding: 6px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.preview-panel th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.file-upload-section {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f9f9f9;
+}
+
+.file-upload-section input[type="file"] {
+  /* 기본 input은 숨기고, label로 디자인하는 것이 일반적이지만 여기서는 간단하게 유지 */
+}
+
+.file-upload-section .file-name {
+  font-size: 0.9em;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-upload-section button {
+  padding: 8px 15px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.file-upload-section button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
