@@ -1,5 +1,5 @@
 import pandas as pd
-import io
+import io, contextlib
 import base64
 from matplotlib import pyplot as plt
 import seaborn as sns
@@ -60,10 +60,13 @@ def python_executor(code: str, new_variable_name: str = None) -> dict:
     local_vars = {"df": active_df_info.df_object.copy(), "plt": plt, "sns": sns}
     plt.close("all")
 
+    f = io.StringIO()
     text_output = ""
     try:
-        exec(code, {}, local_vars)
-        text_output = "코드가 성공적으로 실행되었습니다."  # 기본 성공 메시지
+        with contextlib.redirect_stdout(f):
+            exec(code, {}, local_vars)
+        text_output = f.getvalue()  # 기본 성공 메시지
+        print(local_vars)
     except Exception as e:
         return {"text_result": f"실행 오류: {e}", "image_base64": None}
 
