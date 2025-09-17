@@ -1,7 +1,8 @@
 import pandas as pd
-import uuid
+from typing import List, Dict, Any
+from datetime import datetime
 
-from .dataframe_metainfo import DataFrameMetaInfo
+from dataframe_metainfo import DataFrameMetaInfo
 
 
 class ProjectStateManager:
@@ -15,6 +16,9 @@ class ProjectStateManager:
         )  # 모든 DF 정보를 여기에 저장 {ID: DataFrameMetaInfo}
         self.active_df_id: str | None = None  # 현재 활성화 된 DF의 ID
         self._df_counter = 0
+
+        self.plots: List[Dict[str, Any]] = []  # 모든 Plot을 여기에 저장
+        self._plot_counter = 0
 
     def _generate_id(self):
         self._df_counter += 1
@@ -114,3 +118,15 @@ class ProjectStateManager:
         if self.active_df_id:
             return self.dataframes[self.active_df_id]
         return None
+
+    def register_plot(self, image_base64: str, generating_code: str):
+        """새로운 플롯을 저장소에 등록합니다."""
+        self._plot_counter += 1
+        plot_info = {
+            "id": f"plot_{self._plot_counter:03d}",
+            "image_base64": image_base64,
+            "code": generating_code,
+            "timestamp": datetime.now().isoformat(),
+        }
+        self.plots.append(plot_info)
+        print(f"🖼️  새로운 플롯 등록: {plot_info['id']}")

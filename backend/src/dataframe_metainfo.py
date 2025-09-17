@@ -22,9 +22,8 @@ class DataFrameMetaInfo:
         self.df_object: pd.DataFrame = df_object  # 메모리에 있는 실제 데이터프레임 객체
 
         self.parent_id: str | None = parent_id  # 부모 데이터프레임의 ID
-        self.operation: str = (
-            operation  # 어떤 연산으로 만들어 졌는지 (예: "지역" == "서울" 필터링)
-        )
+        self.operation: str = operation
+
         self.timestamp: datetime = datetime.now()  # 생성 시간
         self.shape = df_object.shape  # 데이터의 형태 (행, 열)
 
