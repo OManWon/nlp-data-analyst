@@ -14,6 +14,7 @@ class DataFrameMetaInfo:
         variable_name: str,
         df_object: pd.DataFrame,
         parent_id: str = None,
+        operation: str = "N/A",
     ):
         self.id: str = df_id  # 고유 ID
         self.name: str = name  # LLM이 지어준 이름 (예: after_merging.csv)
@@ -21,6 +22,7 @@ class DataFrameMetaInfo:
         self.df_object: pd.DataFrame = df_object  # 메모리에 있는 실제 데이터프레임 객체
 
         self.parent_id: str | None = parent_id  # 부모 데이터프레임의 ID
+        self.operation: str = operation
 
         self.timestamp: datetime = datetime.now()  # 생성 시간
         self.shape = df_object.shape  # 데이터의 형태 (행, 열)
