@@ -4,7 +4,7 @@ import base64
 from matplotlib import pyplot as plt
 import seaborn as sns
 from langchain.tools import tool
-from state_manager import ProjectStateManager
+from src.state_manager import ProjectStateManager
 
 # 상태 관리 객체
 state = ProjectStateManager()

@@ -2,7 +2,7 @@ import pandas as pd
 from typing import List, Dict, Any
 from datetime import datetime
 
-from dataframe_metainfo import DataFrameMetaInfo
+from src.dataframe_metainfo import DataFrameMetaInfo
 
 
 class ProjectStateManager:
@@ -71,7 +71,7 @@ class ProjectStateManager:
             print(f"활성 데이터 프레임 변경: [{df_id}]")
             return True
         else:
-            print(f"Error: 존재하는 ID입니다. ({df_id})")
+            print(f"Error: 존재하지않는 ID입니다. ({df_id})")
             return False
 
     def delete_df(self, df_id):
@@ -130,3 +130,22 @@ class ProjectStateManager:
         }
         self.plots.append(plot_info)
         print(f"🖼️  새로운 플롯 등록: {plot_info['id']}")
+
+    def to_snapshot(self):
+        snapshot = {}
+        snapshot["active_df_id"] = self.active_df_id
+        snapshot["df_counter"] = self._df_counter
+        snapshot["dataframes"] = []
+
+        for id, info in self.dataframes.items():
+            snapshot["dataframes"].append(
+                {
+                    "id": info.id,
+                    "name": info.name,
+                    "variable_name": info.variable_name,
+                    "parent_id": info.parent_id,
+                    "operation": info.operation,
+                }
+            )
+
+        return snapshot

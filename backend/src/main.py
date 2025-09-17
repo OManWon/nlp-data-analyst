@@ -1,25 +1,33 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import json
 import pandas as pd
+import uuid
+import os
+from typing import List
 
-from state_manager import ProjectStateManager
-from langchain_tools import (
+from src.state_manager import ProjectStateManager
+from src.langchain_tools import (
     list_dataframes,
     set_active_dataframe,
     delete_dataframe,
     state,
 )
-from models import (
+from src.models import (
     Node,
     Edge,
     DataFramePreview,
     AgentThought,
     AgentResponse,
     ProjectStateResponse,
+    ProjectData,
+    ProjectMetaData,
 )
 
-from langchain_agent_runner import agent_executor
+from src.langchain_agent_runner import agent_executor
+
+PROJECTS_DIR = "projects"
+os.makedirs(PROJECTS_DIR, exist_ok=True)
 
 app = FastAPI()
 
@@ -133,6 +141,80 @@ async def get_dataframe_preview(df_id: str):
         return json.loads(preview_json)
     else:
         return {"error": "DataFrame not found"}
+
+
+@app.post("/api/projects")
+async def create_project(payload: dict):
+    """
+    새로운 프로젝트를 생성합니다.
+    """
+    project_name = payload.get("project_name", "Untitled Project")
+
+    chat_history = []
+    for msg in agent_executor.memory.chat_memory.messages:
+        chat_history.append({"type": msg.type, "content": msg.content})
+
+    dataframe_snapshot = state.to_snapshot()
+
+    plots = state.plots
+
+    project_data = ProjectData(
+        project_id=str(uuid.uuid4()),
+        project_name=project_name,
+        created_at=str(pd.Timestamp.now()),
+        chat_history=chat_history,
+        dataframe_snapshot=dataframe_snapshot,
+        plots=plots,
+    )
+
+    file_path = os.path.join(PROJECTS_DIR, f"{project_data.project_id}.json")
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(project_data.model_dump_json(indent=4))
+
+    return {
+        "message": f"프로젝트 '{project_name}'이 성공적으로 저장되었습니다.",
+        "project_id": project_data.project_id,
+    }
+
+
+@app.get("/api/projects", response_model=List[ProjectMetaData])
+async def list_projects():
+    """
+    모든 프로젝트의 메타데이터 목록을 반환합니다.
+    """
+    project_metadatas = []
+
+    for filename in os.listdir(PROJECTS_DIR):
+        if filename.endswith(".json"):
+            file_path = os.path.join(PROJECTS_DIR, filename)
+            try:
+                with open(file_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    project_metadatas.append(
+                        ProjectMetaData(
+                            project_id=data["project_id"],
+                            project_name=data["project_name"],
+                            created_at=data["created_at"],
+                        )
+                    )
+            except (json.JSONDecodeError, KeyError) as e:
+                # 파일이 손상되었거나 필수 키가 없는 경우 건너뜁니다.
+                print(f"Warning: Skipping invalid project file {filename}: {e}")
+
+    return project_metadatas
+
+
+@app.get("/api/projects/{project_id}", response_model=ProjectData)
+async def get_project(project_id: str):
+    """
+    특정 프로젝트의 전체 데이터를 가져옵니다.
+    """
+    file_path = os.path.join(PROJECTS_DIR, f"{project_id}.json")
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 if __name__ == "__main__":

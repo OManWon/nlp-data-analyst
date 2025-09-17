@@ -1,5 +1,21 @@
 from pydantic import BaseModel
-from typing import List, Any
+from typing import List, Dict, Any
+
+
+class ProjectMetaData(BaseModel):
+    project_id: str
+    project_name: str
+    created_at: str
+
+
+class ProjectData(BaseModel):
+    project_id: str
+    project_name: str
+    created_at: str
+    chat_history: List[Dict]
+    dataframe_snapshot: Dict  # 데이터프레임의 상태 스냅샷
+    plots: List[Dict]
+
 
 class Node(BaseModel):
     id: str
