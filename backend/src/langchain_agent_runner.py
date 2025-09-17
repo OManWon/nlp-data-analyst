@@ -23,7 +23,7 @@ def create_project_agent_executor(chat_history: list = None):
     프로젝트별로 독립된 메모리를 가진 에이전트 실행기를 생성하는 함수.
     """
     # 1. LLM 초기화
-    llm = ChatGoogleGenerativeAI(model="gemini-pro")
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
     # 2. ReAct 프롬프트 템플릿 가져오기
     prompt = hub.pull("hwchase17/react-chat")
